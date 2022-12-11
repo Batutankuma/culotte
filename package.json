@@ -2,6 +2,14 @@
   "name": "culotte",
   "version": "0.0.1",
   "private": true,
+  "author": {
+    "email": "Saelbatita@gmail.com",
+    "name": "Batuta Nkuma",
+    "url": "https://github.com/Batutankuma"
+  },
+  "repository": {
+    "url": "https://github.com/Batutankuma/culotte"
+  },
   "scripts": {
     "start": "node ./config/bin/www"
   },
