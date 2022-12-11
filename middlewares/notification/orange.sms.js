@@ -78,4 +78,4 @@ class OrangeSMS {
 }
 
 
-export default OrangeSMS;
+module.exports =  OrangeSMS;
