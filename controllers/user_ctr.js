@@ -2,13 +2,12 @@ const { PrismaClient } = require('@prisma/client');
 const Notification = require('./../middlewares/notification/prisma.notification');
 const { genSaltSync, compareSync, hashSync } = require('bcryptjs');
 const Auth = require('../middlewares/auth/auth.basic');
-const Notification = require('../middlewares/notification');
 const Prisma = new PrismaClient();
 const { SignToken } = new Auth();
 const { _error, _success } = new Notification();
 
 
-class ControllerUser {
+class Controller {
     //s'inscrire
     async singUp(req, res) {
         try {
@@ -87,4 +86,4 @@ class ControllerUser {
     }
 }
 
-module.exports = ControllerUser;
+module.exports = Controller;
