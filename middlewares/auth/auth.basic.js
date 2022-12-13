@@ -3,16 +3,6 @@ const { decode, verify, sign } = require ('jsonwebtoken');
 
 
 class BasicAuth {
-    /**
-     * 
-     * @param {*} secret_key la clé secret pour le token
-     * @param {24} expiresIn la durée d'utilisation de token
-     */
-    constructor(secret_key, expiresIn) {
-        this.secret_key = secret_key;
-        this.expiresIn = expiresIn;
-    }
-
     //decode jsonWebToken
     DecodeToken(key) {
         const id = decode(key, { json: true });
@@ -24,7 +14,7 @@ class BasicAuth {
         try {
             const token = req.headers.authorization;
             if (token) {
-                const decodedToken = verify(token, this.secret_key);
+                const decodedToken = verify(token, process.env.SECRET_TOKEN);
                 const userId = decodedToken.userId;
                 if (userId) {
                     throw 'Invalid user';
@@ -41,7 +31,7 @@ class BasicAuth {
 
     //sign token
     SignToken(data) {
-        return sign({ data }, this.signToken, { expiresIn: this.expiresIn });
+        return sign({ data }, process.env.SECRET_TOKEN, { expiresIn: process.env.EXPIRESIN });
     }
 }
 

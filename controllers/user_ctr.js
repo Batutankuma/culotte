@@ -3,7 +3,7 @@ const Notification = require('./../middlewares/notification/prisma.notification'
 const { genSaltSync, compareSync, hashSync } = require('bcryptjs');
 const Auth = require('../middlewares/auth/auth.basic');
 const Prisma = new PrismaClient();
-const { SignToken } = new Auth();
+const { SignToken,DecodeToken } = new Auth();
 const { _error, _success } = new Notification();
 
 
@@ -30,19 +30,20 @@ class Controller {
             });
             _success(res, 201, { response: model, tokenKey: SignToken(model.id) });
         } catch (error) {
+            console.log(error);
             _error(res, 401, error.message);
         }
     }
 
     //se connecter
-    async loginIn(req, res) {
+    async logIn(req, res) {
         try {
             const { password, email } = req.body;
             if (!password || !email) throw new Error("Please fill in all fields");
             const emailExist = await Prisma.user.findFirst({ where: { email: email } });
             if (!emailExist) throw new Error("Your password or email is invalid");
             if (!compareSync(password, emailExist.password)) throw new Error("Your password or email is invalid");
-            _success(res, 201, { response: phoneExist, tokenKey: SignToken(phoneExist.id) });
+            _success(res, 201, { response: emailExist, tokenKey: SignToken(emailExist.id) });
         } catch (error) {
             _error(res, 401, error.message);
         }
@@ -60,7 +61,8 @@ class Controller {
     // find for id
     async findId(req, res) {
         try {
-            const model = await Prisma.user.findFirst({ where: { id: req.params.id } });
+            const id_user = DecodeToken(req.headers.authorization);
+            const model = await Prisma.user.findFirst({ where: { id: id_user} });
             _success(res, 200, model);
         } catch (error) {
             _error(res, 400, error.message);
