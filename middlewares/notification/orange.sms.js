@@ -4,20 +4,11 @@ const request = require("request");
 class OrangeSMS {
     /**
      * 
-     * @param {Basic **************==} tokenBasic Secret ket 
-     * @param {+243 000000000} phoneNumber number customer Orange
-     */
-    constructor(tokenBasic, phoneNumberOrange) {
-        this.tokenBasic = tokenBasic;
-        this.phoneNumberOrange = phoneNumberOrange;
-    }
-    /**
-     * 
      * @param {+243 000000000} desinateur Number Phone Customer
      * @param {Mbote Mokili} message Message For Customer
      */
     sender(phoneCustomer, message) {
-        credentials = this.tokenBasic;
+        credentials = process.env.TOKENBASIC;
         var postData = "";
         postData += "grant_type=client_credentials";
         var options = {
@@ -46,7 +37,7 @@ class OrangeSMS {
 
     _send(token, phone, messagee) {
         var receveirr = "tel:" + phone;
-        var senders = "tel:" + this.phoneNumberOrange;
+        var senders = "tel:" + process.env.PHONENUMBER;
         var headers = {
             'Authorization': "Bearer " + token,
             'Content-Type': 'application/json'
@@ -61,7 +52,7 @@ class OrangeSMS {
             }
         };
         var options = {
-            uri: `https://api.orange.com/smsmessaging/v1/outbound/tel:${this.phoneNumberOrange}/requests`,
+            uri: `https://api.orange.com/smsmessaging/v1/outbound/tel:${process.env.PHONENUMBER}/requests`,
             method: 'POST',
             headers: headers,
             body: JSON.stringify(body)

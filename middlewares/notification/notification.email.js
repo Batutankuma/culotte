@@ -2,21 +2,14 @@ const nodemailer = require('nodemailer');
 
 
 class Email {
-    constructor(port,host,username,password){
-        this.username = username;
-        this.password = password;
-        this.port = port;
-        this.host = host;
-    }
-   
     sendEmail = async (recev, title, message) => {
-        let user = this.username;
-        let pwd = this.password;
+        let user = process.env.USERNAME;
+        let pwd = process.env.PASSWORD;
 
         // create transport
         let transporter = nodemailer.createTransport({
-            host: this.host,
-            port: this.port,
+            host: process.env.HOST,
+            port: process.env.PORT,
             secureConnection: false,// true for 465, false for other ports
             auth: {
                 user: user, // generated ethereal user
