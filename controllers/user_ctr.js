@@ -1,6 +1,7 @@
 const { PrismaClient } = require('@prisma/client');
 const Notification = require('./../middlewares/notification/prisma.notification');
 const { genSaltSync, compareSync, hashSync } = require('bcryptjs');
+const {upload_file} = require('./../controllers/upload_ctr');
 const Auth = require('../middlewares/auth/auth.basic');
 const Prisma = new PrismaClient();
 const { SignToken,DecodeToken } = new Auth();
@@ -25,7 +26,7 @@ class Controller {
                     name: name,
                     email: email,
                     password: passwordHash,
-                    avatar: avatar
+                    avatar: upload_file(req)
                 }
             });
             _success(res, 201, { response: model, tokenKey: SignToken(model.id) });
