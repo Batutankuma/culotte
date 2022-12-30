@@ -1,7 +1,7 @@
 {
   "name": "culotte",
   "version": "0.0.1",
-  "private": true,
+  "private": false,
   "author": {
     "email": "Saelbatita@gmail.com",
     "name": "Batuta Nkuma",
