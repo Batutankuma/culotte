@@ -28,6 +28,17 @@
     "nodemailer": "^6.8.0",
     "request": "^2.88.2"
   },
+  "files": [
+    "config",
+    "controllers",
+    "middlewares",
+    "prisma",
+    "public",
+    "routes",
+    "storage",
+    "tests",
+    "views"
+  ],
   "devDependencies": {
     "prisma": "^4.7.1"
   }
