@@ -8,6 +8,7 @@
     "url": "https://github.com/Batutankuma"
   },
   "repository": {
+    "type": "git",
     "url": "https://github.com/Batutankuma/culotte"
   },
   "scripts": {
@@ -29,15 +30,20 @@
     "request": "^2.88.2"
   },
   "files": [
-    "config",
-    "controllers",
-    "middlewares",
-    "prisma",
-    "public",
-    "routes",
-    "storage",
-    "tests",
-    "views"
+    "/config",
+    "/controllers",
+    "/middlewares",
+    "/prisma",
+    "/public",
+    "/routes",
+    "/storage",
+    "/tests",
+    "/views",
+    ".env",
+    ".gitignore",
+    "app.js",
+    "LICENSE",
+    "README.md"
   ],
   "devDependencies": {
     "prisma": "^4.7.1"
